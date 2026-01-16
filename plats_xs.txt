@@ -1,0 +1,16 @@
+15
+Pollastre Fort;4.53;589;2;false;primer
+Quinoa Popular;3.4;697;7;true;postre
+Fideus Batut;5.93;268;2;true;primer
+Cuscús Quotidià;4.75;124;4;false;primer
+Quinoa Saludable;6.65;137;1;true;postre
+Peix Lent;5.82;149;5;false;segon
+Ou Oriental;4.32;132;1;true;primer
+Hamburguesa Saborós;5.23;679;1;true;segon
+Pollastre Casolà;6.68;629;1;true;primer
+Pollastre Suau;6.95;319;3;false;primer
+Ou Sobri;5.34;175;3;false;segon
+Cuscús Reescalfat;4.9;552;5;true;segon
+Ou Espès;2.58;497;1;false;segon
+Tofu Elegant;7.2;259;10;false;segon
+Hamburguesa Compartit;7.02;292;7;true;postre

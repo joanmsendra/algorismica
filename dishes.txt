@@ -1,0 +1,13 @@
+12
+Amanida Verda;3.5;150;7;true;primer
+Sopa de Ceba;4.0;180;6;true;primer
+Macarrons amb Tomaquet;5.5;600;9;true;segon
+Pollastre al Forn;6.0;500;8;false;segon
+Iogurt;1.5;100;5;true;postre
+Fruita;1.0;80;6;true;postre
+Pasta al Pesto;5.0;700;8;true;segon
+Gaspatxo;3.0;120;7;true;primer
+Helado;2.0;200;9;true;postre
+Lentejas;4.5;400;7;true;primer
+Bistec;7.0;300;8;false;segon
+Flam;2.5;150;6;false;postre

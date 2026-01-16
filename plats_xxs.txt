@@ -1,0 +1,11 @@
+10
+Tofu Fumat;3.16;255;8;true;segon
+Pa Picant;6.08;381;7;false;segon
+Fruita Suau;6.19;240;2;false;segon
+Macarrons Compartit;3.85;624;3;true;primer
+Iogurt Pesat;4.65;202;1;false;segon
+Arròs Innovador;4.08;439;6;true;primer
+Sopa Salat;5.56;610;4;false;primer
+Fideus Marró;6.56;700;9;true;segon
+Arròs Elegant;2.15;586;8;true;segon
+Seità Dolcet;6.82;187;7;true;primer
