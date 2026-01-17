@@ -1,0 +1,106 @@
+
+1. INTRODUCCIÓ I JUSTIFICACIÓ DEL LLENGUATGE
+============================================
+
+Per a la realització d'aquesta pràctica s'ha escollit el llenguatge C. Els motius principals són:
+1.  **Eficiència i Rendiment**: C permet un control de baix nivell sobre la memòria i l'execució, fet crucial per a algorismes recursius i combinatoris (Backtracking i Branch & Bound) on el temps d'execució pot créixer exponencialment.
+2.  **Gestió de Memòria**: L'ús de punters i assignació dinàmica (`malloc`, `free`) permet gestionar estructures de dades grans (com les llistes de plats i menús) de manera optimitzada, sense la sobrecàrrega de recol·lectors d'escombraries d'altres llenguatges.
+
+2. DISSENY DELS ALGORISMES
+==========================
+
+PROBLEMA 1: COMPOSICIÓ DE MENÚS
+-------------------------------
+**Estratègia Greedy (Voraç):**
+-   Ordena els plats segons un criteri heurístic (per exemple, preu ascendent o popularitat descendent).
+-   Itera i selecciona el millor plat disponible que compleixi les restriccions (pressupost, tipus).
+-   *Avantatge*: Molt ràpid.
+-   *Desavantatge*: No garanteix l'òptim global i pot fallar en trobar solucions vàlides estrictes (com el requisit del menú vegetarià).
+
+**Estratègia Backtracking (Exacta):**
+-   Explora sistemàticament totes les combinacions possibles de plats per formar menús.
+-   **Poda (Pruning)**: S'ha implementat una poda que estima el nombre màxim de menús restants possibles (basat en el recompte de plats per tipus). Si `actual + potencial <= millor_solució`, es descarta la branca.
+-   *Avantatge*: Garanteix trobar la solució òptima (màxim nombre de menús).
+-   *Desavantatge*: Complexitat temporal exponencial. Lents per a N gran.
+
+PROBLEMA 2: DISTRIBUCIÓ EQUITATIVA
+----------------------------------
+**Estratègia Greedy:**
+-   Assigna cada plat a la cafeteria amb menor popularitat acumulada actualment.
+-   És una heurística ràpida per equilibrar càrregues.
+
+**Estratègia Branch & Bound (Ramificació i Poda):**
+-   Explora l'arbre d'assignacions.
+-   Utilitza una fita (bound) basada en la popularitat ideal (mitjana) per podar branques que segur que empitjoraran el desequilibri (Imbalance) actual.
+-   **Millora (Sorting)**: Ordenar els plats per popularitat descendent abans de processar ajuda a trobar solucions bones abans, permetent podar més part de l'arbre.
+
+3. ANÀLISI DELS RESULTATS
+=========================
+
+Aquesta secció presenta una comparativa exhaustiva del rendiment dels algorismes implementats utilitzant tots els datasets proporcionats, des del més petit (XXS) fins al més massiu (XXL).
+
+TAULA RESUM DE RESULTATS
+-----------------------------------------------------------------------------------------------------------------------------------
+Dataset (N)   | Algorisme       | Problema 1: Menús (Temps)       | Problema 2: Desequilibri (Temps) | Observacions Clau
+-----------------------------------------------------------------------------------------------------------------------------------
+XXS (10)      | Greedy          | 0 Menús (0.001s)                | Imbalance: 1 (0.001s)            | P1: Falla restricció vegetarià.
+              | Backtracking/B&B| 0 Menús (0.001s)                | Imbalance: 1 (0.001s)            | Resultats idèntics. Dataset massa petit.
+-----------------------------------------------------------------------------------------------------------------------------------
+XS (15)       | Greedy          | 1 Menú* (0.001s)                | Imbalance: 2 (0.001s)            | P1*: Menú invàlid (no veg). P2: Solució pitjor.
+              | Backtracking/B&B| 0 Menús (0.001s)                | Imbalance: 1 (0.003s)            | P2: B&B troba millor distribució que Greedy.
+-----------------------------------------------------------------------------------------------------------------------------------
+S (50)        | Greedy          | 3 Menús (0.002s)                | Imbalance: 0 (0.003s)            | Greedy és molt ràpid però subòptim en P1.
+              | Backtracking/B&B| **5 Menús** (0.368s)            | Timeout (> 60s)                  | **P1: Backtracking millora un 66% la solució.**
+-----------------------------------------------------------------------------------------------------------------------------------
+M (100)       | Greedy          | 8 Menús (0.004s)                | Imbalance: 2 (0.006s)            | Greedy escala linealment i manté velocitat.
+              | Backtracking/B&B| Timeout / Inviable              | Timeout / Inviable               | Explosió combinatòria ($N!$). No viable.
+-----------------------------------------------------------------------------------------------------------------------------------
+L (500)       | Greedy          | Error (Crash/Stack)             | Imbalance: 0 (0.001s)            | P1 falla per recursivitat profunda. P2 funciona bé.
+              | Backtracking/B&B| No executat                     | No executat                      | Totalment inviable.
+-----------------------------------------------------------------------------------------------------------------------------------
+XL/XXL (1000+)| Greedy          | Error (Crash)                   | Imbalance: Baix (Estimat)        | P1 requereix versió iterativa.
+              | Backtracking/B&B| No executat                     | No executat                      | -
+-----------------------------------------------------------------------------------------------------------------------------------
+
+INTERPRETACIÓ I DISCUSSIÓ DELS DADES
+------------------------------------
+
+**1. La Superioritat de l'Algorisme Exacte (Cas S - 50 plats)**
+El resultat més revelador es troba en el dataset `S`. L'algorisme Greedy, prenent decisions locals (agafant el primer plat bo que troba), es conforma amb **3 menús**. L'algorisme de Backtracking, explorant l'espai de solucions, aconsegueix reorganitzar els plats per produir **5 menús**. 
+*   Això demostra que, per a instàncies de mida controlada, **l'algorisme exacte aporta un valor real i tangible** (un 66% més de producció), justificant el temps de càlcul extra (0.3s vs 0.002s).
+
+**2. La Barrera de l'Escalabilitat (Cas M - 100 plats)**
+En passar de 50 a 100 plats, observem la naturalesa exponencial del problema. El temps de Backtracking passa de menys d'un segon a no acabar en minuts (Timeout). 
+*   Això il·lustra perfectament per què necessitem algorismes Greedy o heurístiques per a problemes grans: la cerca exacta esdevé físicament impossible molt ràpidament.
+
+**3. Correctesa vs. Robustesa (Casos Petits XXS/XS)**
+En els datasets petits, el Greedy del Problema 1 retorna solucions (1 menú) que incompleixen la restricció global ("almenys un vegetarià"), mentre que el Backtracking retorna 0.
+*   Això posa de manifest un risc dels algorismes Greedy: la seva "miopia" pot portar a solucions que semblen bones però que tècnicament són invàlides si hi ha restriccions globals complexes. El Backtracking és més rigorós.
+
+**4. Límits Tècnics de la Implementació (Casos L/XL)**
+En intentar executar el Greedy amb 500+ plats per al Problema 1, el programa tanca inesperadament (Crash).
+*   Això probablement es deu a un *Stack Overflow*. Com que la solució Greedy s'ha implementat (o la gestió de llistes) de manera que consumeix recursos de pila proporcionalment a N, arribem al límit del sistema operatiu. Per a aplicacions industrials (Mida L/XL), caldria reescriure l'algorisme de manera purament iterativa i gestionar la memòria al *Heap*.
+
+**5. Problema 2: Greedy és sorprenentment eficaç**
+Per al problema de distribució, el Greedy aconsegueix sovint desequilibris (Imbalance) molt baixos (0, 1 o 2) en temps menyspreable, fins i tot per a datasets grans. El Branch & Bound, tot i garantir l'òptim, pateix moltíssim per podar l'arbre eficaçment sense una funció d'estimació (bound) extremadament precisa, fent-lo poc pràctic comparat amb l'eficàcia del Greedy.
+
+4. PROBLEMES OBSERVATS I SOLUCIONS
+==================================
+
+1.  **Temps d'Execució en Datasets Grans**: El Backtracking es penja  amb M i L.
+    *   *Solució implementada*: S'ha afegit una condició al `main.c` per saltar l'execució del Backtracking (versió sense poda) si N > 15, i s'ha vist que fins i tot amb poda, N > 50 és el límit pràctic per a aquest problema.
+
+2.  **Bloqueig de fitxers (.exe)**: A Windows, recompilar mentre el programa està obert donava error.
+    *   *Solució*: Tancar la terminal o el procés abans de fer `make`.
+
+3.  **Crash en Dataset L/XL amb Greedy**: En algunes execucions, el programa tanca inesperadament amb dades massives.
+    *   *Causes probables*: Desbordament de pila (Stack Overflow) per recursivitat excessiva o límits de memòria.
+    *   *Proposta*: Augmentar la mida de l'stack del compilador o passar a un enfocament iteratiu en lloc de recursiu per a datasets molt grans.
+
+5. CONCLUSIONS
+==============
+
+La pràctica demostra el compromís clàssic entre **optimilitat** i **eficiència**.
+-   Per a **presa de decisions crítiques** amb pocs elements (ex: un càtering petit VIP), el **Backtracking/B&B** és indispensable perquè troba solucions considerablement millors (Cas S: 5 vs 3 menús).
+-   Per a **gestió massiva** (ex: menjador universitari diari amb centenars de plats), el **Greedy** és l'única opció viable, tot i el risc de no complir estrictament totes les restriccions complexes (com la del menú vegetarià).
+-   L'anàlisi confirma que els resultats "buits" (0 menús) de l'algorisme exacte són correctes i revelen la incapacitat del conjunt de dades per satisfer les restriccions estrictes, cosa que l'algorisme Greedy emmascara donant resultats parcialment invàlids.

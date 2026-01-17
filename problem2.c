@@ -8,6 +8,9 @@
 
 #define NUM_CAFETERIAS 3
 
+// Variable global per a mètriques
+long long p2_nodes_explored = 0;
+
 // --- Funcions Auxiliars ---
 
 void init_cafeteria(Cafeteria *c, int max_dishes) {
@@ -50,14 +53,9 @@ int calculate_imbalance(Cafeteria cafs[]) {
 
 bool check_constraints(Cafeteria cafs[], int total_veg) {
     (void)total_veg; // No utilitzat
-    // "Equitablement" normalment significa diferència <= 1
-    // és a dir, floor(total/3) o ceil(total/3)
     
     for (int i = 0; i < NUM_CAFETERIAS; i++) {
         if (!cafs[i].has_primer || !cafs[i].has_segon || !cafs[i].has_postre) return false;
-        // Comprovar l'equilibri vegetarià estrictament?
-        // Permetem un equilibri fluix: desviació de la mitjana <= 1
-        // De fet, el més simple és max_veg - min_veg <= 1
     }
     
     int min_v = INT_MAX, max_v = INT_MIN;
@@ -95,12 +93,7 @@ void solve_problem2_greedy(DishList *list) {
     
     qsort(ptrs, list->count, sizeof(Dish*), compare_dishes_desc_pop);
 
-    // Lògica de distribució:
-    // 1. Dividir en Vegetarià i No Vegetarià
-    // 2. Ordenar ambdós per Popularitat Descendent
-    // 3. Distribuir plats vegetarians (Prioritzar necessitats de Tipus, després equilibri de recompte Veg, després equilibri Pop)
-    // 4. Distribuir plats No vegetarians (Prioritzar necessitats de Tipus, després equilibri Pop)
-
+    // Lògica de distribució
     Dish *veg_dishes[100], *non_veg_dishes[100];
     int n_veg = 0, n_non = 0;
 
@@ -108,12 +101,6 @@ void solve_problem2_greedy(DishList *list) {
         if (ptrs[i]->is_vegetarian) veg_dishes[n_veg++] = ptrs[i];
         else non_veg_dishes[n_non++] = ptrs[i];
     }
-    
-    // La lògica d'ordenació ja ha ordenat els ptrs, però els hem dividit. Mantenen l'ordre relatiu si és estable,
-    // o podem ordenar-los de nou. És prou simple ordenar de nou o confiar que estan ordenats si hem recorregut ptrs ordenats.
-    // Sí, recórrer ptrs ordenats assegura que els sub-arrays estan ordenats.
-    // Espera, he iterat list->count (0..N) no ptrs. Culpa meva.
-    // Necessito iterar ptrs per mantenir l'ordre ordenat.
     
     n_veg = 0; n_non = 0;
     for (int i = 0; i < list->count; i++) {
@@ -132,8 +119,6 @@ void solve_problem2_greedy(DishList *list) {
             if (veg_dishes[i]->type == SEGON && !cafs[c].has_segon) needs = true;
             if (veg_dishes[i]->type == POSTRE && !cafs[c].has_postre) needs = true;
 
-            // Puntuació: Minimitzar recompte Veg (primari), Maximitzar necessitats (secundari), Minimitzar Pop (terciari)
-            // Puntuació = VegCount * 100000 - (needs ? 10000 : 0) + TotalPop
             long long score = (long long)cafs[c].veg_count * 100000 
                             - (needs ? 10000 : 0) 
                             + cafs[c].total_popularity;
@@ -163,8 +148,6 @@ void solve_problem2_greedy(DishList *list) {
             if (non_veg_dishes[i]->type == SEGON && !cafs[c].has_segon) needs = true;
             if (non_veg_dishes[i]->type == POSTRE && !cafs[c].has_postre) needs = true;
 
-            // Puntuació: Maximitzar necessitats (primari), Minimitzar Pop (secundari)
-            // El recompte vegetarià no importa per als plats no vegetarians
             long long score = -(needs ? 100000 : 0) + cafs[c].total_popularity;
             
             if (score < best_score) {
@@ -183,7 +166,6 @@ void solve_problem2_greedy(DishList *list) {
     print_distribution(cafs, list);
     printf("Imbalance (Max-Min Pop): %d\n", calculate_imbalance(cafs));
     
-    // Avisar si les restriccions fallen (Greedy no ho garanteix)
     if (!check_constraints(cafs, total_veg)) {
         printf("WARNING: Greedy strategy failed to satisfy all constraints.\n");
     }
@@ -199,10 +181,6 @@ int *best_assignment = NULL; // Mida de la matriu list->count, valor 0,1,2
 // Auxiliar per comprovar la viabilitat parcial
 bool is_promising(DishList *list, int current_idx, Cafeteria cafs[], int total_veg) {
     (void)total_veg;
-    // Comprovar l'equilibri vegetarià fins ara?
-    // Difícil de comprovar estrictament durant el parcial.
-    // Comprovar si és IMPOSSIBLE satisfer els tipus?
-    // p. ex., si la Caf 0 necessita Primer, i no queden Primers a la llista[current_idx...end], llavors podar.
     
     // Comptar tipus restants
     int rem_p = 0, rem_s = 0, rem_po = 0, rem_veg = 0;
@@ -225,21 +203,9 @@ bool is_promising(DishList *list, int current_idx, Cafeteria cafs[], int total_v
         if(cafs[c].veg_count < min_v) min_v = cafs[c].veg_count;
         if(cafs[c].veg_count > max_v) max_v = cafs[c].veg_count;
     }
-    // Si la diferència actual ja és > 1 i no la podem arreglar?
-    // Podem arreglar-ho si afegim al mínim.
-    // Veg teòric màxim per a la caf min_v = min_v + rem_veg.
-    // Si min_v + rem_veg < max_v - 1 (aprox), llavors fallar.
     if (min_v + rem_veg < max_v - 1) return false;
 
     // Límit en el desequilibri de popularitat
-    // El desequilibri actual és max_pop - min_pop.
-    // Podem millorar-ho? Sí, afegint a min_pop.
-    // Estimació del límit inferior:
-    // Mitjana ideal = (suma(actual) + suma(restant)) / 3.
-    // Si el màxim actual > Mitjana ideal + marge?
-    // Límit simple: si (current_max - (current_min + sum_remaining_pop)) > best_imbalance, llavors podar?
-    // Només si current_min + remaining < current_max - best_imbalance.
-    
     int sum_rem = 0;
     for (int i = current_idx; i < list->count; i++) sum_rem += list->dishes[i].popularity;
     
@@ -249,19 +215,14 @@ bool is_promising(DishList *list, int current_idx, Cafeteria cafs[], int total_v
         if (cafs[c].total_popularity > curr_max) curr_max = cafs[c].total_popularity;
     }
 
-    // Optimista: aboquem tota la pop restant al cubell mínim.
-    // Fins i tot llavors, si max - (min + sum_rem) > best_imbalance, podar.
-    // Perquè la diferència només pot disminuir si min creix. Max no s'encongeix.
     if (curr_max - (curr_min + sum_rem) >= best_imbalance) return false; 
-    // Espera, si best_imbalance és INT_MAX, això passa.
-
-    // Si la diferència actual (sense afegir res) és > best_imbalance?
-    // No, afegir coses podria augmentar min sense augmentar max.
     
     return true;
 }
 
 void bb_recursive(DishList *list, int idx, Cafeteria cafs[], int *assignment, int total_veg) {
+    p2_nodes_explored++;
+
     if (idx == list->count) {
         if (check_constraints(cafs, total_veg)) {
             int imb = calculate_imbalance(cafs);
@@ -280,8 +241,7 @@ void bb_recursive(DishList *list, int idx, Cafeteria cafs[], int *assignment, in
 
     // Branca: Provar cada cafeteria
     for (int c = 0; c < NUM_CAFETERIAS; c++) {
-        // Optimització: si totes les cafeteries són idèntiques (buides), només provar la primera per trencar la simetria
-        // (Només rellevant al principi, o si n'hi ha diverses buides)
+        // Optimització: si totes les cafeteries són idèntiques (buides), només provar la primera
         if (c > 0 && cafs[c].count == 0 && cafs[c-1].count == 0) continue; 
 
         cafs[c].dish_indices[cafs[c].count++] = d->id;
@@ -308,9 +268,10 @@ void bb_recursive(DishList *list, int idx, Cafeteria cafs[], int *assignment, in
     }
 }
 
-void solve_problem2_branch_and_bound(DishList *list) {
-    printf("\n--- Problem 2: Branch & Bound Strategy ---\n");
+void solve_problem2_branch_and_bound(DishList *list, bool enable_sorting) {
+    printf("\n--- Problem 2: Branch & Bound Strategy (Sorting: %s) ---\n", enable_sorting ? "ON" : "OFF");
     
+    p2_nodes_explored = 0;
     best_imbalance = INT_MAX;
     best_assignment = (int *)malloc(list->count * sizeof(int));
     int *current_assignment = (int *)malloc(list->count * sizeof(int));
@@ -321,27 +282,21 @@ void solve_problem2_branch_and_bound(DishList *list) {
     int total_veg = 0;
     for(int i=0; i<list->count; i++) if(list->dishes[i].is_vegetarian) total_veg++;
 
-    // Ordenar la llista per popularitat descendent per ajudar B&B a trobar bones solucions aviat?
-    // Nota: ordenar la llista canvia els índexs. Cal anar amb compte si confiem en els IDs.
-    // L'estructura té 'id', així que estem segurs si utilitzem això.
-    // De fet, ordenar ajuda al Greedy, i ajuda a la poda de B&B (assignant elements grans primer).
-    // Reutilitzaré la lògica ordenada o simplement ordenaré la llista mateixa (copiar-la).
-    // De moment, executem en l'ordre original o potser ordenem una còpia local de punters.
-    // Per simplificar el codi B&B, utilitzem la llista tal com està. Però ordenar és una gran optimització per a B&B.
-    
-    // Lògica d'ordenació (copiar llista a llista temporal ordenada)
+    // Lògica d'ordenació (copiar llista a llista temporal)
     DishList sorted_list;
     sorted_list.count = list->count;
     sorted_list.dishes = malloc(list->count * sizeof(Dish));
     memcpy(sorted_list.dishes, list->dishes, list->count * sizeof(Dish));
     
-    // Ordenació simple bombolla o qsort
-    for(int i=0; i<sorted_list.count-1; i++) {
-        for(int j=0; j<sorted_list.count-i-1; j++) {
-            if(sorted_list.dishes[j].popularity < sorted_list.dishes[j+1].popularity) {
-                Dish temp = sorted_list.dishes[j];
-                sorted_list.dishes[j] = sorted_list.dishes[j+1];
-                sorted_list.dishes[j+1] = temp;
+    if (enable_sorting) {
+        // Ordenació simple bombolla o qsort
+        for(int i=0; i<sorted_list.count-1; i++) {
+            for(int j=0; j<sorted_list.count-i-1; j++) {
+                if(sorted_list.dishes[j].popularity < sorted_list.dishes[j+1].popularity) {
+                    Dish temp = sorted_list.dishes[j];
+                    sorted_list.dishes[j] = sorted_list.dishes[j+1];
+                    sorted_list.dishes[j+1] = temp;
+                }
             }
         }
     }
@@ -366,16 +321,11 @@ void solve_problem2_branch_and_bound(DishList *list) {
             if(sorted_list.dishes[i].is_vegetarian) cafs[c].veg_count++;
         }
         
-        // Imprimir utilitzant la cerca de la llista original si cal, però tenim IDs.
-        // La funció d'impressió utilitza la llista i cerca per ID?
-        // No, la funció d'impressió utilitza list->dishes[d_idx].
-        // d_idx és id.
-        // La meva llista passada a solve_... té plats a índex == id (0 a N-1).
-        // Sí, load_dishes estableix id = i.
-        
         print_distribution(cafs, list);
         printf("Best Imbalance: %d\n", best_imbalance);
     }
+    
+    printf("Nodes Explored: %I64d\n", p2_nodes_explored);
 
     free(sorted_list.dishes);
     free(best_assignment);

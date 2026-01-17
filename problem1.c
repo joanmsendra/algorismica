@@ -4,6 +4,10 @@
 #include <string.h>
 #include "problem1.h"
 
+// Variable global per a mètriques
+long long p1_nodes_explored = 0;
+bool p1_enable_pruning = true;
+
 // --- Funcions Auxiliars ---
 
 void print_menu(const Menu *m, const DishList *list, int menu_num) {
@@ -132,133 +136,29 @@ typedef struct {
 
 Solution best_sol;
 bool *bt_used;
-int bt_n_dishes;
-
-void backtrack_menus(DishList *list, Solution *current) {
-    // Comprovar si l'actual és millor que el millor
-    if (current->count > best_sol.count && current->has_veg) {
-        // Còpia profunda a best_sol
-        if (best_sol.menus) free(best_sol.menus);
-        best_sol.menus = malloc(current->count * sizeof(Menu));
-        memcpy(best_sol.menus, current->menus, current->count * sizeof(Menu));
-        best_sol.count = current->count;
-        best_sol.has_veg = current->has_veg;
-    }
-
-    // Optimització: Poda
-    // Si els plats restants no poden superar best_sol, retornar.
-    // Comptar primers, segons i postres no utilitzats. Màxim teòric de menús addicionals = min(unused_prim, unused_seg, unused_postre)
-    int unused_p = 0, unused_s = 0, unused_po = 0;
-    for(int i=0; i<list->count; i++) {
-        if(!bt_used[list->dishes[i].id]) {
-            if(list->dishes[i].type == PRIMER) unused_p++;
-            else if(list->dishes[i].type == SEGON) unused_s++;
-            else if(list->dishes[i].type == POSTRE) unused_po++;
-        }
-    }
-    int max_possible = current->count + (unused_p < unused_s ? (unused_p < unused_po ? unused_p : unused_po) : (unused_s < unused_po ? unused_s : unused_po));
-    
-    if (max_possible <= best_sol.count) return;
-
-    // Intentar trobar una tupla (p, s, po)
-    // Per evitar permutacions del mateix conjunt de menús, hauríem d'iterar en un ordre canònic o consumir plats.
-    // No obstant això, com que només necessitem trobar *qualsevol* combinació que maximitzi K, podem iterar pels plats disponibles.
-    // Per evitar O(N^3) en cada pas, podem agafar el primer Primer disponible, i després intentar casar-lo amb S i Po.
-    
-    int p_idx = -1;
-    for(int i=0; i<list->count; i++) {
-        if (list->dishes[i].type == PRIMER && !bt_used[list->dishes[i].id]) {
-            p_idx = i;
-            break; // Agafar el primer primer disponible per forçar l'ordre i reduir el factor de ramificació
-        }
-    }
-
-    if (p_idx == -1) return; // No hi ha més primers, no es poden fer més menús
-
-    bt_used[list->dishes[p_idx].id] = true;
-
-    for (int s = 0; s < list->count; s++) {
-        if (list->dishes[s].type == SEGON && !bt_used[list->dishes[s].id]) {
-            bt_used[list->dishes[s].id] = true;
-            
-            for (int po = 0; po < list->count; po++) {
-                if (list->dishes[po].type == POSTRE && !bt_used[list->dishes[po].id]) {
-                     if (is_valid_menu(&list->dishes[p_idx], &list->dishes[s], &list->dishes[po])) {
-                        bool is_veg = list->dishes[p_idx].is_vegetarian && 
-                                      list->dishes[s].is_vegetarian && 
-                                      list->dishes[po].is_vegetarian;
-
-                        // Afegir a la solució actual
-                        bt_used[list->dishes[po].id] = true;
-                        
-                        // Reassignar la matriu de menús actual (enfocament simple)
-                        current->menus = realloc(current->menus, (current->count + 1) * sizeof(Menu));
-                        current->menus[current->count].primer_idx = list->dishes[p_idx].id;
-                        current->menus[current->count].segon_idx = list->dishes[s].id;
-                        current->menus[current->count].postre_idx = list->dishes[po].id;
-                        current->menus[current->count].total_price = list->dishes[p_idx].price + list->dishes[s].price + list->dishes[po].price;
-                        current->menus[current->count].avg_popularity = (list->dishes[p_idx].popularity + list->dishes[s].popularity + list->dishes[po].popularity) / 3.0;
-                        current->menus[current->count].is_vegetarian = is_veg;
-                        
-                        bool old_has_veg = current->has_veg;
-                        if (is_veg) current->has_veg = true;
-                        current->count++;
-
-                        backtrack_menus(list, current);
-
-                        // Backtrack (tornar enrere)
-                        current->count--;
-                        current->has_veg = old_has_veg; // Només funciona si assumim que un camí cap avall el va establir.
-                        // De fet, has_veg és una propietat del CONJUNT. Si eliminem un menú vegetarià, podríem perdre la propietat.
-                        // Hem de tornar a comprovar has_veg o comptar quants menús vegetarians tenim.
-                        // Comptem els menús vegetarians en lloc de bool.
-                        bt_used[list->dishes[po].id] = false;
-                     }
-                }
-            }
-            bt_used[list->dishes[s].id] = false;
-        }
-    }
-    
-    // Considerar també l'opció on saltem aquest primer?
-    // Si saltem aquest primer, mai no el podrem utilitzar (ja que agafem el primer disponible).
-    // De fet, si no aconseguim casar aquest primer amb CAP segon/postre, efectivament el saltem.
-    // Però i si casar-lo impedeix una millor solució global?
-    // Com que hem agafat el *primer* disponible, si no l'utilitzem ara, diem "aquest primer no forma part de cap menú en el conjunt òptim".
-    // Així que hauríem de tenir una branca on NO utilitzem p_idx.
-    
-    bt_used[list->dishes[p_idx].id] = false; // Desmarcar com a utilitzat per a la branca "saltar"
-    // Marcar com a "saltat" per a aquest nivell de recursivitat?
-    // Enfocament estàndard: Iterar pels elements, incloure o excloure.
-    // Aquí construïm menús.
-    
-    // Recursivitat alternativa:
-    // try_match(primer_idx):
-    //   if invalid primer, return
-    //   branch 1: Try to match primer_idx with all valid pairs of (S, Po). For each match, recurse.
-    //   branch 2: Don't use primer_idx. Recurse to try_match(primer_idx + 1).
-    
-}
 
 // Millor estructura de Backtracking
 void backtrack_recursive(DishList *list, int p_idx, int veg_count, int menu_count, Menu *current_menus) {
-    
+    p1_nodes_explored++;
+
     // Cas base o comprovació de Poda
-    int remaining_primers = 0;
-    for(int i = p_idx; i < list->count; i++) 
-        if (list->dishes[i].type == PRIMER && !bt_used[list->dishes[i].id]) remaining_primers++;
-    
-    int unused_s = 0, unused_po = 0;
-    for(int i=0; i<list->count; i++) {
-        if(!bt_used[list->dishes[i].id]) {
-            if(list->dishes[i].type == SEGON) unused_s++;
-            else if(list->dishes[i].type == POSTRE) unused_po++;
+    if (p1_enable_pruning) {
+        int remaining_primers = 0;
+        for(int i = p_idx; i < list->count; i++) 
+            if (list->dishes[i].type == PRIMER && !bt_used[list->dishes[i].id]) remaining_primers++;
+        
+        int unused_s = 0, unused_po = 0;
+        for(int i=0; i<list->count; i++) {
+            if(!bt_used[list->dishes[i].id]) {
+                if(list->dishes[i].type == SEGON) unused_s++;
+                else if(list->dishes[i].type == POSTRE) unused_po++;
+            }
         }
+        
+        int potential = menu_count + (remaining_primers < unused_s ? (remaining_primers < unused_po ? remaining_primers : unused_po) : (unused_s < unused_po ? unused_s : unused_po));
+        
+        if (potential <= best_sol.count) return;
     }
-    
-    int potential = menu_count + (remaining_primers < unused_s ? (remaining_primers < unused_po ? remaining_primers : unused_po) : (unused_s < unused_po ? unused_s : unused_po));
-    
-    if (potential <= best_sol.count) return;
 
     // Actualitzar la millor solució si és vàlida
     if (menu_count > best_sol.count && veg_count > 0) {
@@ -319,11 +219,14 @@ void backtrack_recursive(DishList *list, int p_idx, int veg_count, int menu_coun
 }
 
 
-void solve_problem1_backtracking(DishList *list) {
-    printf("\n--- Problem 1: Backtracking Strategy ---\n");
+void solve_problem1_backtracking(DishList *list, bool enable_pruning) {
+    p1_enable_pruning = enable_pruning;
+    p1_nodes_explored = 0;
+    
+    printf("\n--- Problem 1: Backtracking Strategy (Pruning: %s) ---\n", enable_pruning ? "ON" : "OFF");
     
     best_sol.menus = NULL;
-    best_sol.count = 0; // Corregit: Inicialitzar a 0
+    best_sol.count = 0;
     best_sol.has_veg = false;
 
     bt_used = (bool*)calloc(1000, sizeof(bool)); // Ajustar la mida segons sigui necessari o utilitzar l'ID màxim
@@ -332,7 +235,9 @@ void solve_problem1_backtracking(DishList *list) {
     
     backtrack_recursive(list, 0, 0, 0, current_menus);
     
-    printf("Best Solution Found (Menus: %d):\n", best_sol.count);
+    printf("Best Solution Found (Menus: %d)\n", best_sol.count);
+    printf("Nodes Explored: %I64d\n", p1_nodes_explored);
+
     if (best_sol.count > 0) {
         for (int i = 0; i < best_sol.count; i++) {
             print_menu(&best_sol.menus[i], list, i+1);

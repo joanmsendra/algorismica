@@ -1,0 +1,976 @@
+xxs:
+Loaded 10 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 1
+
+--- Problem 1: Greedy Strategy ---
+Could not form a valid vegetarian menu.
+Total Menus Created: 0
+Time taken: 0.001000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 2
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+Best Solution Found (Menus: 0)
+Nodes Explored: 1
+No valid solution found satisfying all constraints.
+Time taken: 0.001000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 3
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 19, Veg: 2):
+  - Fideus Marr├│ (Segon, Veg: Yes, Pop: 9)
+  - Macarrons Compartit (Primer, Veg: Yes, Pop: 3)
+  - Pa Picant (Segon, Veg: No, Pop: 7)
+Cafeteria 2 (Pop: 18, Veg: 2):
+  - Arr├▓s Elegant (Segon, Veg: Yes, Pop: 8)
+  - Seit├á Dolcet (Primer, Veg: Yes, Pop: 7)
+  - Fruita Suau (Segon, Veg: No, Pop: 2)
+  - Iogurt Pesat (Segon, Veg: No, Pop: 1)
+Cafeteria 3 (Pop: 18, Veg: 2):
+  - Tofu Fumat (Segon, Veg: Yes, Pop: 8)
+  - Arr├▓s Innovador (Primer, Veg: Yes, Pop: 6)
+  - Sopa Salat (Primer, Veg: No, Pop: 4)
+Imbalance (Max-Min Pop): 1
+WARNING: Greedy strategy failed to satisfy all constraints.
+Time taken: 0.002000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 4
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+No valid distribution found.
+Nodes Explored: 1
+Time taken: 0.001000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 5
+
+=== BENCHMARK START ===
+
+--- Problem 1: Greedy Strategy ---
+Could not form a valid vegetarian menu.
+Total Menus Created: 0
+P1 Greedy Time: 0.001000 s
+
+--- Comparativa P1 Backtracking ---
+
+--- Problem 1: Backtracking Strategy (Pruning: OFF) ---
+Best Solution Found (Menus: 0)
+Nodes Explored: 5
+No valid solution found satisfying all constraints.
+P1 Backtracking (NO PODA) Time: 0.000000 s
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+Best Solution Found (Menus: 0)
+Nodes Explored: 1
+No valid solution found satisfying all constraints.
+P1 Backtracking (WITH PODA) Time: 0.001000 s
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 19, Veg: 2):
+  - Fideus Marr├│ (Segon, Veg: Yes, Pop: 9)
+  - Macarrons Compartit (Primer, Veg: Yes, Pop: 3)
+  - Pa Picant (Segon, Veg: No, Pop: 7)
+Cafeteria 2 (Pop: 18, Veg: 2):
+  - Arr├▓s Elegant (Segon, Veg: Yes, Pop: 8)
+  - Seit├á Dolcet (Primer, Veg: Yes, Pop: 7)
+  - Fruita Suau (Segon, Veg: No, Pop: 2)
+  - Iogurt Pesat (Segon, Veg: No, Pop: 1)
+Cafeteria 3 (Pop: 18, Veg: 2):
+  - Tofu Fumat (Segon, Veg: Yes, Pop: 8)
+  - Arr├▓s Innovador (Primer, Veg: Yes, Pop: 6)
+  - Sopa Salat (Primer, Veg: No, Pop: 4)
+Imbalance (Max-Min Pop): 1
+WARNING: Greedy strategy failed to satisfy all constraints.
+P2 Greedy Time: 0.001000 s
+
+--- Comparativa P2 Branch & Bound ---
+
+--- Problem 2: Branch & Bound Strategy (Sorting: OFF) ---
+No valid distribution found.
+Nodes Explored: 1
+P2 B&B (NO SORT) Time: 0.000000 s
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+No valid distribution found.
+Nodes Explored: 1
+P2 B&B (SORTED) Time: 0.001000 s
+
+=== BENCHMARK END ===
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option:
+
+xs:
+
+Loaded 15 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 1
+
+--- Problem 1: Greedy Strategy ---
+Could not form a valid vegetarian menu.
+Total Menus Created: 1
+Menu 1:
+  Primer: Cusc├║s Quotidi├á (4.75 EUR, Pop: 4)
+  Segon:  Ou Esp├¿s (2.58 EUR, Pop: 1)
+  Postre: Quinoa Popular (3.40 EUR, Pop: 7)
+  Total: 10.73 EUR, Avg Pop: 4.00, Veg: No
+Time taken: 0.001000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 2
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+Best Solution Found (Menus: 0)
+Nodes Explored: 11
+No valid solution found satisfying all constraints.
+Time taken: 0.001000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 3
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 17, Veg: 3):
+  - Quinoa Popular (Postre, Veg: Yes, Pop: 7)
+  - Ou Oriental (Primer, Veg: Yes, Pop: 1)
+  - Hamburguesa Sabor├│s (Segon, Veg: Yes, Pop: 1)
+  - Cusc├║s Quotidi├á (Primer, Veg: No, Pop: 4)
+  - Pollastre Suau (Primer, Veg: No, Pop: 3)
+  - Ou Esp├¿s (Segon, Veg: No, Pop: 1)
+Cafeteria 2 (Pop: 19, Veg: 3):
+  - Hamburguesa Compartit (Postre, Veg: Yes, Pop: 7)
+  - Quinoa Saludable (Postre, Veg: Yes, Pop: 1)
+  - Pollastre Casol├á (Primer, Veg: Yes, Pop: 1)
+  - Tofu Elegant (Segon, Veg: No, Pop: 10)
+Cafeteria 3 (Pop: 17, Veg: 2):
+  - Cusc├║s Reescalfat (Segon, Veg: Yes, Pop: 5)
+  - Fideus Batut (Primer, Veg: Yes, Pop: 2)
+  - Peix Lent (Segon, Veg: No, Pop: 5)
+  - Ou Sobri (Segon, Veg: No, Pop: 3)
+  - Pollastre Fort (Primer, Veg: No, Pop: 2)
+Imbalance (Max-Min Pop): 2
+WARNING: Greedy strategy failed to satisfy all constraints.
+Time taken: 0.002000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 4
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+Cafeteria 1 (Pop: 18, Veg: 2):
+  - Tofu Elegant (Segon, Veg: No, Pop: 10)
+  - Quinoa Popular (Postre, Veg: Yes, Pop: 7)
+  - Ou Oriental (Primer, Veg: Yes, Pop: 1)
+Cafeteria 2 (Pop: 18, Veg: 3):
+  - Hamburguesa Compartit (Postre, Veg: Yes, Pop: 7)
+  - Peix Lent (Segon, Veg: No, Pop: 5)
+  - Cusc├║s Reescalfat (Segon, Veg: Yes, Pop: 5)
+  - Pollastre Casol├á (Primer, Veg: Yes, Pop: 1)
+Cafeteria 3 (Pop: 17, Veg: 3):
+  - Cusc├║s Quotidi├á (Primer, Veg: No, Pop: 4)
+  - Pollastre Suau (Primer, Veg: No, Pop: 3)
+  - Ou Sobri (Segon, Veg: No, Pop: 3)
+  - Pollastre Fort (Primer, Veg: No, Pop: 2)
+  - Fideus Batut (Primer, Veg: Yes, Pop: 2)
+  - Quinoa Saludable (Postre, Veg: Yes, Pop: 1)
+  - Hamburguesa Sabor├│s (Segon, Veg: Yes, Pop: 1)
+  - Ou Esp├¿s (Segon, Veg: No, Pop: 1)
+Best Imbalance: 1
+Nodes Explored: 20731
+Time taken: 0.003000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 5
+
+=== BENCHMARK START ===
+
+--- Problem 1: Greedy Strategy ---
+Could not form a valid vegetarian menu.
+Total Menus Created: 1
+Menu 1:
+  Primer: Cusc├║s Quotidi├á (4.75 EUR, Pop: 4)
+  Segon:  Ou Esp├¿s (2.58 EUR, Pop: 1)
+  Postre: Quinoa Popular (3.40 EUR, Pop: 7)
+  Total: 10.73 EUR, Avg Pop: 4.00, Veg: No
+P1 Greedy Time: 0.001000 s
+
+--- Comparativa P1 Backtracking ---
+
+--- Problem 1: Backtracking Strategy (Pruning: OFF) ---
+Best Solution Found (Menus: 0)
+Nodes Explored: 11
+No valid solution found satisfying all constraints.
+P1 Backtracking (NO PODA) Time: 0.000000 s
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+Best Solution Found (Menus: 0)
+Nodes Explored: 11
+No valid solution found satisfying all constraints.
+P1 Backtracking (WITH PODA) Time: 0.000000 s
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 17, Veg: 3):
+  - Quinoa Popular (Postre, Veg: Yes, Pop: 7)
+  - Ou Oriental (Primer, Veg: Yes, Pop: 1)
+  - Hamburguesa Sabor├│s (Segon, Veg: Yes, Pop: 1)
+  - Cusc├║s Quotidi├á (Primer, Veg: No, Pop: 4)
+  - Pollastre Suau (Primer, Veg: No, Pop: 3)
+  - Ou Esp├¿s (Segon, Veg: No, Pop: 1)
+Cafeteria 2 (Pop: 19, Veg: 3):
+  - Hamburguesa Compartit (Postre, Veg: Yes, Pop: 7)
+  - Quinoa Saludable (Postre, Veg: Yes, Pop: 1)
+  - Pollastre Casol├á (Primer, Veg: Yes, Pop: 1)
+  - Tofu Elegant (Segon, Veg: No, Pop: 10)
+Cafeteria 3 (Pop: 17, Veg: 2):
+  - Cusc├║s Reescalfat (Segon, Veg: Yes, Pop: 5)
+  - Fideus Batut (Primer, Veg: Yes, Pop: 2)
+  - Peix Lent (Segon, Veg: No, Pop: 5)
+  - Ou Sobri (Segon, Veg: No, Pop: 3)
+  - Pollastre Fort (Primer, Veg: No, Pop: 2)
+Imbalance (Max-Min Pop): 2
+WARNING: Greedy strategy failed to satisfy all constraints.
+P2 Greedy Time: 0.001000 s
+
+--- Comparativa P2 Branch & Bound ---
+
+--- Problem 2: Branch & Bound Strategy (Sorting: OFF) ---
+Cafeteria 1 (Pop: 17, Veg: 3):
+  - Pollastre Fort (Primer, Veg: No, Pop: 2)
+  - Quinoa Popular (Postre, Veg: Yes, Pop: 7)
+  - Fideus Batut (Primer, Veg: Yes, Pop: 2)
+  - Cusc├║s Quotidi├á (Primer, Veg: No, Pop: 4)
+  - Ou Oriental (Primer, Veg: Yes, Pop: 1)
+  - Ou Esp├¿s (Segon, Veg: No, Pop: 1)
+Cafeteria 2 (Pop: 18, Veg: 3):
+  - Quinoa Saludable (Postre, Veg: Yes, Pop: 1)
+  - Peix Lent (Segon, Veg: No, Pop: 5)
+  - Hamburguesa Sabor├│s (Segon, Veg: Yes, Pop: 1)
+  - Pollastre Casol├á (Primer, Veg: Yes, Pop: 1)
+  - Tofu Elegant (Segon, Veg: No, Pop: 10)
+Cafeteria 3 (Pop: 18, Veg: 2):
+  - Pollastre Suau (Primer, Veg: No, Pop: 3)
+  - Ou Sobri (Segon, Veg: No, Pop: 3)
+  - Cusc├║s Reescalfat (Segon, Veg: Yes, Pop: 5)
+  - Hamburguesa Compartit (Postre, Veg: Yes, Pop: 7)
+Best Imbalance: 1
+Nodes Explored: 578911
+P2 B&B (NO SORT) Time: 0.012000 s
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+Cafeteria 1 (Pop: 18, Veg: 2):
+  - Tofu Elegant (Segon, Veg: No, Pop: 10)
+  - Quinoa Popular (Postre, Veg: Yes, Pop: 7)
+  - Ou Oriental (Primer, Veg: Yes, Pop: 1)
+Cafeteria 2 (Pop: 18, Veg: 3):
+  - Hamburguesa Compartit (Postre, Veg: Yes, Pop: 7)
+  - Peix Lent (Segon, Veg: No, Pop: 5)
+  - Cusc├║s Reescalfat (Segon, Veg: Yes, Pop: 5)
+  - Pollastre Casol├á (Primer, Veg: Yes, Pop: 1)
+Cafeteria 3 (Pop: 17, Veg: 3):
+  - Cusc├║s Quotidi├á (Primer, Veg: No, Pop: 4)
+  - Pollastre Suau (Primer, Veg: No, Pop: 3)
+  - Ou Sobri (Segon, Veg: No, Pop: 3)
+  - Pollastre Fort (Primer, Veg: No, Pop: 2)
+  - Fideus Batut (Primer, Veg: Yes, Pop: 2)
+  - Quinoa Saludable (Postre, Veg: Yes, Pop: 1)
+  - Hamburguesa Sabor├│s (Segon, Veg: Yes, Pop: 1)
+  - Ou Esp├¿s (Segon, Veg: No, Pop: 1)
+Best Imbalance: 1
+Nodes Explored: 20731
+P2 B&B (SORTED) Time: 0.002000 s
+
+=== BENCHMARK END ===
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option:
+
+s:
+Loaded 50 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 1
+
+--- Problem 1: Greedy Strategy ---
+Total Menus Created: 3
+Menu 1:
+  Primer: Macarrons R├ápid (2.28 EUR, Pop: 9)
+  Segon:  Past├¡s Nou (3.69 EUR, Pop: 6)
+  Postre: Cusc├║s C├®sar (4.67 EUR, Pop: 6)
+  Total: 10.64 EUR, Avg Pop: 7.00, Veg: Yes
+Menu 2:
+  Primer: Tofu Vermell (3.16 EUR, Pop: 3)
+  Segon:  Pizza Crem├│s (2.64 EUR, Pop: 4)
+  Postre: Sopa C├®sar (3.20 EUR, Pop: 7)
+  Total: 9.00 EUR, Avg Pop: 4.67, Veg: No
+Menu 3:
+  Primer: Seit├á Sec (3.42 EUR, Pop: 7)
+  Segon:  Farinetes Espum├│s (3.78 EUR, Pop: 5)
+  Postre: Hamburguesa Mediterrani (4.14 EUR, Pop: 6)
+  Total: 11.34 EUR, Avg Pop: 6.00, Veg: No
+Time taken: 0.003000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 2
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+Best Solution Found (Menus: 5)
+Nodes Explored: 959452
+Menu 1:
+  Primer: Peix Greix├│s (5.11 EUR, Pop: 8)
+  Segon:  Pizza Crem├│s (2.64 EUR, Pop: 4)
+  Postre: Hamburguesa Mediterrani (4.14 EUR, Pop: 6)
+  Total: 11.89 EUR, Avg Pop: 6.00, Veg: No
+Menu 2:
+  Primer: Farinetes Cru (3.54 EUR, Pop: 2)
+  Segon:  Farinetes Espum├│s (3.78 EUR, Pop: 5)
+  Postre: Llenties Espurnejant (4.31 EUR, Pop: 8)
+  Total: 11.63 EUR, Avg Pop: 5.00, Veg: No
+Menu 3:
+  Primer: Macarrons R├ápid (2.28 EUR, Pop: 9)
+  Segon:  Patata Nou (4.89 EUR, Pop: 8)
+  Postre: Cusc├║s C├®sar (4.67 EUR, Pop: 6)
+  Total: 11.84 EUR, Avg Pop: 7.67, Veg: Yes
+Menu 4:
+  Primer: Fruita Tallat (3.67 EUR, Pop: 6)
+  Segon:  Past├¡s Nou (3.69 EUR, Pop: 6)
+  Postre: Carn Farcit (4.63 EUR, Pop: 5)
+  Total: 11.99 EUR, Avg Pop: 5.67, Veg: No
+Menu 5:
+  Primer: Tofu Vermell (3.16 EUR, Pop: 3)
+  Segon:  Tofu Sobrat (5.64 EUR, Pop: 10)
+  Postre: Sopa C├®sar (3.20 EUR, Pop: 7)
+  Total: 12.00 EUR, Avg Pop: 6.67, Veg: No
+Time taken: 0.390000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 3
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 85, Veg: 6):
+  - Tofu Esp├¿s (Primer, Veg: Yes, Pop: 9)
+  - Cusc├║s Car (Primer, Veg: Yes, Pop: 7)
+  - Past├¡s Nou (Segon, Veg: Yes, Pop: 6)
+  - Farinetes Cruixent (Segon, Veg: Yes, Pop: 5)
+  - Crema Crem├│s (Primer, Veg: Yes, Pop: 3)
+  - Cusc├║s R├ápid (Postre, Veg: Yes, Pop: 1)
+  - Amanida Tradicional (Primer, Veg: No, Pop: 10)
+  - Llenties Fresc (Primer, Veg: No, Pop: 9)
+  - Iogurt Elegant (Postre, Veg: No, Pop: 8)
+  - Peix Greix├│s (Primer, Veg: No, Pop: 8)
+  - Amanida Sobri (Primer, Veg: No, Pop: 5)
+  - Carn Farcit (Postre, Veg: No, Pop: 5)
+  - Pizza Crem├│s (Segon, Veg: No, Pop: 4)
+  - Patata Carn├│s (Primer, Veg: No, Pop: 2)
+  - Pa Fort (Postre, Veg: No, Pop: 2)
+  - Hamburguesa Cl├ássic (Postre, Veg: No, Pop: 1)
+Cafeteria 2 (Pop: 85, Veg: 6):
+  - Macarrons R├ápid (Primer, Veg: Yes, Pop: 9)
+  - Farinetes Decorat (Primer, Veg: Yes, Pop: 6)
+  - Fruita Tallat (Primer, Veg: Yes, Pop: 6)
+  - Farinetes Farcit (Primer, Veg: Yes, Pop: 6)
+  - Farinetes T├¿bi (Primer, Veg: Yes, Pop: 2)
+  - Amanida T├¿bi (Postre, Veg: Yes, Pop: 2)
+  - Crema Veg├á (Primer, Veg: No, Pop: 10)
+  - Pizza Sobri (Segon, Veg: No, Pop: 10)
+  - Fideus Arom├átic (Postre, Veg: No, Pop: 8)
+  - Peix Fermentat (Segon, Veg: No, Pop: 6)
+  - Amanida Delici├│s (Primer, Veg: No, Pop: 6)
+  - Farinetes Espum├│s (Segon, Veg: No, Pop: 5)
+  - Past├¡s Ratllat (Postre, Veg: No, Pop: 4)
+  - Tofu Decorat (Postre, Veg: No, Pop: 2)
+  - Farinetes Cru (Primer, Veg: No, Pop: 2)
+  - Fideus Verd (Segon, Veg: No, Pop: 1)
+Cafeteria 3 (Pop: 85, Veg: 7):
+  - Patata Nou (Segon, Veg: Yes, Pop: 8)
+  - Seit├á Sec (Primer, Veg: Yes, Pop: 7)
+  - Cusc├║s C├®sar (Postre, Veg: Yes, Pop: 6)
+  - Cusc├║s Sabor├│s (Primer, Veg: Yes, Pop: 5)
+  - Iogurt Tendre (Primer, Veg: Yes, Pop: 3)
+  - Fideus Dolcet (Segon, Veg: Yes, Pop: 1)
+  - Sopa Festiu (Postre, Veg: Yes, Pop: 1)
+  - Tofu Sobrat (Segon, Veg: No, Pop: 10)
+  - Hamburguesa Negre (Primer, Veg: No, Pop: 9)
+  - Llenties Espurnejant (Postre, Veg: No, Pop: 8)
+  - Sopa C├®sar (Postre, Veg: No, Pop: 7)
+  - Hamburguesa Mediterrani (Postre, Veg: No, Pop: 6)
+  - Verdura Decorat (Primer, Veg: No, Pop: 5)
+  - Pa Carn├│s (Primer, Veg: No, Pop: 3)
+  - Tofu Vermell (Primer, Veg: No, Pop: 3)
+  - Fideus C├®sar (Primer, Veg: No, Pop: 1)
+  - Fruita Tendre (Postre, Veg: No, Pop: 1)
+  - Fruita Sobrat (Primer, Veg: No, Pop: 1)
+Imbalance (Max-Min Pop): 0
+Time taken: 0.004000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 4
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+(se queda asi)
+
+Loaded 50 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 5
+
+=== BENCHMARK START ===
+
+--- Problem 1: Greedy Strategy ---
+Total Menus Created: 3
+Menu 1:
+  Primer: Macarrons R├ápid (2.28 EUR, Pop: 9)
+  Segon:  Past├¡s Nou (3.69 EUR, Pop: 6)
+  Postre: Cusc├║s C├®sar (4.67 EUR, Pop: 6)
+  Total: 10.64 EUR, Avg Pop: 7.00, Veg: Yes
+Menu 2:
+  Primer: Tofu Vermell (3.16 EUR, Pop: 3)
+  Segon:  Pizza Crem├│s (2.64 EUR, Pop: 4)
+  Postre: Sopa C├®sar (3.20 EUR, Pop: 7)
+  Total: 9.00 EUR, Avg Pop: 4.67, Veg: No
+Menu 3:
+  Primer: Seit├á Sec (3.42 EUR, Pop: 7)
+  Segon:  Farinetes Espum├│s (3.78 EUR, Pop: 5)
+  Postre: Hamburguesa Mediterrani (4.14 EUR, Pop: 6)
+  Total: 11.34 EUR, Avg Pop: 6.00, Veg: No
+P1 Greedy Time: 0.002000 s
+
+--- Comparativa P1 Backtracking ---
+Skipping P1 Backtracking (NO PODA) because N > 15 (too slow)
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+Best Solution Found (Menus: 5)
+Nodes Explored: 959452
+Menu 1:
+  Primer: Peix Greix├│s (5.11 EUR, Pop: 8)
+  Segon:  Pizza Crem├│s (2.64 EUR, Pop: 4)
+  Postre: Hamburguesa Mediterrani (4.14 EUR, Pop: 6)
+  Total: 11.89 EUR, Avg Pop: 6.00, Veg: No
+Menu 2:
+  Primer: Farinetes Cru (3.54 EUR, Pop: 2)
+  Segon:  Farinetes Espum├│s (3.78 EUR, Pop: 5)
+  Postre: Llenties Espurnejant (4.31 EUR, Pop: 8)
+  Total: 11.63 EUR, Avg Pop: 5.00, Veg: No
+Menu 3:
+  Primer: Macarrons R├ápid (2.28 EUR, Pop: 9)
+  Segon:  Patata Nou (4.89 EUR, Pop: 8)
+  Postre: Cusc├║s C├®sar (4.67 EUR, Pop: 6)
+  Total: 11.84 EUR, Avg Pop: 7.67, Veg: Yes
+Menu 4:
+  Primer: Fruita Tallat (3.67 EUR, Pop: 6)
+  Segon:  Past├¡s Nou (3.69 EUR, Pop: 6)
+  Postre: Carn Farcit (4.63 EUR, Pop: 5)
+  Total: 11.99 EUR, Avg Pop: 5.67, Veg: No
+Menu 5:
+  Primer: Tofu Vermell (3.16 EUR, Pop: 3)
+  Segon:  Tofu Sobrat (5.64 EUR, Pop: 10)
+  Postre: Sopa C├®sar (3.20 EUR, Pop: 7)
+  Total: 12.00 EUR, Avg Pop: 6.67, Veg: No
+P1 Backtracking (WITH PODA) Time: 0.368000 s
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 85, Veg: 6):
+  - Tofu Esp├¿s (Primer, Veg: Yes, Pop: 9)
+  - Cusc├║s Car (Primer, Veg: Yes, Pop: 7)
+  - Past├¡s Nou (Segon, Veg: Yes, Pop: 6)
+  - Farinetes Cruixent (Segon, Veg: Yes, Pop: 5)
+  - Crema Crem├│s (Primer, Veg: Yes, Pop: 3)
+  - Cusc├║s R├ápid (Postre, Veg: Yes, Pop: 1)
+  - Amanida Tradicional (Primer, Veg: No, Pop: 10)
+  - Llenties Fresc (Primer, Veg: No, Pop: 9)
+  - Iogurt Elegant (Postre, Veg: No, Pop: 8)
+  - Peix Greix├│s (Primer, Veg: No, Pop: 8)
+  - Amanida Sobri (Primer, Veg: No, Pop: 5)
+  - Carn Farcit (Postre, Veg: No, Pop: 5)
+  - Pizza Crem├│s (Segon, Veg: No, Pop: 4)
+  - Patata Carn├│s (Primer, Veg: No, Pop: 2)
+  - Pa Fort (Postre, Veg: No, Pop: 2)
+  - Hamburguesa Cl├ássic (Postre, Veg: No, Pop: 1)
+Cafeteria 2 (Pop: 85, Veg: 6):
+  - Macarrons R├ápid (Primer, Veg: Yes, Pop: 9)
+  - Farinetes Decorat (Primer, Veg: Yes, Pop: 6)
+  - Fruita Tallat (Primer, Veg: Yes, Pop: 6)
+  - Farinetes Farcit (Primer, Veg: Yes, Pop: 6)
+  - Farinetes T├¿bi (Primer, Veg: Yes, Pop: 2)
+  - Amanida T├¿bi (Postre, Veg: Yes, Pop: 2)
+  - Crema Veg├á (Primer, Veg: No, Pop: 10)
+  - Pizza Sobri (Segon, Veg: No, Pop: 10)
+  - Fideus Arom├átic (Postre, Veg: No, Pop: 8)
+  - Peix Fermentat (Segon, Veg: No, Pop: 6)
+  - Amanida Delici├│s (Primer, Veg: No, Pop: 6)
+  - Farinetes Espum├│s (Segon, Veg: No, Pop: 5)
+  - Past├¡s Ratllat (Postre, Veg: No, Pop: 4)
+  - Tofu Decorat (Postre, Veg: No, Pop: 2)
+  - Farinetes Cru (Primer, Veg: No, Pop: 2)
+  - Fideus Verd (Segon, Veg: No, Pop: 1)
+Cafeteria 3 (Pop: 85, Veg: 7):
+  - Patata Nou (Segon, Veg: Yes, Pop: 8)
+  - Seit├á Sec (Primer, Veg: Yes, Pop: 7)
+  - Cusc├║s C├®sar (Postre, Veg: Yes, Pop: 6)
+  - Cusc├║s Sabor├│s (Primer, Veg: Yes, Pop: 5)
+  - Iogurt Tendre (Primer, Veg: Yes, Pop: 3)
+  - Fideus Dolcet (Segon, Veg: Yes, Pop: 1)
+  - Sopa Festiu (Postre, Veg: Yes, Pop: 1)
+  - Tofu Sobrat (Segon, Veg: No, Pop: 10)
+  - Hamburguesa Negre (Primer, Veg: No, Pop: 9)
+  - Llenties Espurnejant (Postre, Veg: No, Pop: 8)
+  - Sopa C├®sar (Postre, Veg: No, Pop: 7)
+  - Hamburguesa Mediterrani (Postre, Veg: No, Pop: 6)
+  - Verdura Decorat (Primer, Veg: No, Pop: 5)
+  - Pa Carn├│s (Primer, Veg: No, Pop: 3)
+  - Tofu Vermell (Primer, Veg: No, Pop: 3)
+  - Fideus C├®sar (Primer, Veg: No, Pop: 1)
+  - Fruita Tendre (Postre, Veg: No, Pop: 1)
+  - Fruita Sobrat (Primer, Veg: No, Pop: 1)
+Imbalance (Max-Min Pop): 0
+P2 Greedy Time: 0.003000 s
+
+--- Comparativa P2 Branch & Bound ---
+
+--- Problem 2: Branch & Bound Strategy (Sorting: OFF) ---
+
+
+m:
+
+Loaded 100 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 1
+
+--- Problem 1: Greedy Strategy ---
+Total Menus Created: 8
+Menu 1:
+  Primer: Cusc├║s Creatiu (2.16 EUR, Pop: 2)
+  Segon:  Patata Colorit (2.80 EUR, Pop: 5)
+  Postre: Fruita Mediterrani (2.54 EUR, Pop: 9)
+  Total: 7.50 EUR, Avg Pop: 5.33, Veg: Yes
+Menu 2:
+  Primer: Hamburguesa Esp├¿ciat (2.13 EUR, Pop: 10)
+  Segon:  Formatge Festiu (2.05 EUR, Pop: 1)
+  Postre: Arr├▓s C├®sar (2.26 EUR, Pop: 7)
+  Total: 6.44 EUR, Avg Pop: 6.00, Veg: No
+Menu 3:
+  Primer: Macarrons Blanc (2.20 EUR, Pop: 1)
+  Segon:  Pa Greix├│s (3.14 EUR, Pop: 6)
+  Postre: Fideus Elegant (2.30 EUR, Pop: 5)
+  Total: 7.64 EUR, Avg Pop: 4.00, Veg: No
+Menu 4:
+  Primer: Fruita Tendre (2.28 EUR, Pop: 6)
+  Segon:  Tofu Modern (3.18 EUR, Pop: 2)
+  Postre: Crema Estacional (2.61 EUR, Pop: 8)
+  Total: 8.07 EUR, Avg Pop: 5.33, Veg: No
+Menu 5:
+  Primer: Crema Delici├│s (2.76 EUR, Pop: 10)
+  Segon:  Quinoa Esp├¿s (3.21 EUR, Pop: 7)
+  Postre: Verdura Popular (2.28 EUR, Pop: 1)
+  Total: 8.25 EUR, Avg Pop: 6.00, Veg: No
+Menu 6:
+  Primer: Iogurt Calent (3.23 EUR, Pop: 4)
+  Segon:  Fideus Negre (3.40 EUR, Pop: 2)
+  Postre: Pollastre Reescalfat (2.78 EUR, Pop: 9)
+  Total: 9.41 EUR, Avg Pop: 5.00, Veg: No
+Menu 7:
+  Primer: Seit├á T├¿bi (4.13 EUR, Pop: 5)
+  Segon:  Hamburguesa Humit (4.04 EUR, Pop: 6)
+  Postre: Cusc├║s Sobretot (2.63 EUR, Pop: 4)
+  Total: 10.80 EUR, Avg Pop: 5.00, Veg: No
+Menu 8:
+  Primer: Ou Oriental (4.44 EUR, Pop: 10)
+  Segon:  Tofu Sobretot (4.26 EUR, Pop: 8)
+  Postre: Iogurt Blanc (2.85 EUR, Pop: 10)
+  Total: 11.55 EUR, Avg Pop: 9.33, Veg: No
+Time taken: 0.003000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 2
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+(se queda asi)
+
+Loaded 100 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 3
+
+--- Problem 2: Greedy Strategy ---
+Cafeteria 1 (Pop: 207, Veg: 19):
+  - Fideus Fort (Segon, Veg: Yes, Pop: 10)
+  - Peix T├▓xic (Postre, Veg: Yes, Pop: 10)
+  - Cusc├║s Popular (Primer, Veg: Yes, Pop: 9)
+  - Farinetes Sobrat (Postre, Veg: Yes, Pop: 9)
+  - Arr├▓s Suau (Primer, Veg: Yes, Pop: 8)
+  - Fruita R├ápid (Segon, Veg: Yes, Pop: 8)
+  - Tofu Nutritiu (Segon, Veg: Yes, Pop: 8)
+  - Tofu Sobretot (Segon, Veg: Yes, Pop: 8)
+  - Quinoa Esp├¿s (Segon, Veg: Yes, Pop: 7)
+  - Farinetes Senzill (Primer, Veg: Yes, Pop: 6)
+  - Verdura Saludable (Segon, Veg: Yes, Pop: 6)
+  - Ou Car (Segon, Veg: Yes, Pop: 6)
+  - Llenties Apetit├│s (Segon, Veg: Yes, Pop: 5)
+  - Arr├▓s Vegetari├á (Postre, Veg: Yes, Pop: 5)
+  - Cusc├║s Sobretot (Postre, Veg: Yes, Pop: 4)
+  - Patata R├ápid (Primer, Veg: Yes, Pop: 2)
+  - Hamburguesa Daurat (Primer, Veg: Yes, Pop: 2)
+  - Pizza Esp├¿ciat (Segon, Veg: Yes, Pop: 1)
+  - Verdura Popular (Postre, Veg: Yes, Pop: 1)
+  - Crema Delici├│s (Primer, Veg: No, Pop: 10)
+  - Ou Oriental (Primer, Veg: No, Pop: 10)
+  - Crema Calent (Postre, Veg: No, Pop: 10)
+  - Macarrons Org├ánic (Primer, Veg: No, Pop: 9)
+  - Patata Ratllat (Postre, Veg: No, Pop: 8)
+  - Farinetes Daurat (Postre, Veg: No, Pop: 8)
+  - Arr├▓s C├®sar (Postre, Veg: No, Pop: 7)
+  - Verdura Org├ánic (Primer, Veg: No, Pop: 6)
+  - Sopa Suau (Postre, Veg: No, Pop: 6)
+  - Fideus Calent (Postre, Veg: No, Pop: 5)
+  - Patata Barrejat (Segon, Veg: No, Pop: 4)
+  - Amanida Ex├▓tic (Segon, Veg: No, Pop: 3)
+  - Formatge Rebo├ºat (Postre, Veg: No, Pop: 2)
+  - Fruita Car (Postre, Veg: No, Pop: 2)
+  - Pizza Natural (Segon, Veg: No, Pop: 2)
+Cafeteria 2 (Pop: 206, Veg: 19):
+  - Carn Festiu (Primer, Veg: Yes, Pop: 10)
+  - Quinoa Marr├│ (Segon, Veg: Yes, Pop: 10)
+  - Quinoa Bullent (Primer, Veg: Yes, Pop: 9)
+  - Fruita Mediterrani (Postre, Veg: Yes, Pop: 9)
+  - Seit├á Rebo├ºat (Segon, Veg: Yes, Pop: 8)
+  - Pizza Veg├á (Primer, Veg: Yes, Pop: 8)
+  - Patata Delici├│s (Segon, Veg: Yes, Pop: 8)
+  - Amanida Decorat (Postre, Veg: Yes, Pop: 8)
+  - Fruita Decorat (Primer, Veg: Yes, Pop: 6)
+  - Quinoa Ratllat (Postre, Veg: Yes, Pop: 6)
+  - Quinoa Blanc (Postre, Veg: Yes, Pop: 6)
+  - Seit├á Esp├¿s (Primer, Veg: Yes, Pop: 6)
+  - Formatge Esp├¿ciat (Postre, Veg: Yes, Pop: 5)
+  - Amanida Rebo├ºat (Postre, Veg: Yes, Pop: 5)
+  - Quinoa Familiar (Primer, Veg: Yes, Pop: 5)
+  - Hamburguesa Festiu (Segon, Veg: Yes, Pop: 2)
+  - Cusc├║s Creatiu (Primer, Veg: Yes, Pop: 2)
+  - Carn T├¿bi (Primer, Veg: Yes, Pop: 1)
+  - Fruita Innovador (Postre, Veg: Yes, Pop: 1)
+  - Patata Calent (Primer, Veg: No, Pop: 10)
+  - Quinoa Car (Segon, Veg: No, Pop: 10)
+  - Verdura Pesat (Postre, Veg: No, Pop: 9)
+  - Pizza Vegetari├á (Postre, Veg: No, Pop: 9)
+  - Iogurt Farcit (Postre, Veg: No, Pop: 9)
+  - Tofu Quotidi├á (Postre, Veg: No, Pop: 8)
+  - Carn Vegetari├á (Primer, Veg: No, Pop: 7)
+  - Hamburguesa Humit (Segon, Veg: No, Pop: 6)
+  - Fruita Tendre (Primer, Veg: No, Pop: 6)
+  - Quinoa Nutritiu (Primer, Veg: No, Pop: 4)
+  - Iogurt Calent (Primer, Veg: No, Pop: 4)
+  - Iogurt Negre (Primer, Veg: No, Pop: 4)
+  - Fideus Negre (Segon, Veg: No, Pop: 2)
+  - Macarrons Sobri (Postre, Veg: No, Pop: 2)
+  - Formatge Festiu (Segon, Veg: No, Pop: 1)
+Cafeteria 3 (Pop: 205, Veg: 18):
+  - Quinoa Separat (Postre, Veg: Yes, Pop: 10)
+  - Formatge Marinat (Primer, Veg: Yes, Pop: 10)
+  - Fideus Minimalista (Segon, Veg: Yes, Pop: 9)
+  - Quinoa Lent (Segon, Veg: Yes, Pop: 8)
+  - Crema Estacional (Postre, Veg: Yes, Pop: 8)
+  - Verdura Creatiu (Segon, Veg: Yes, Pop: 8)
+  - Pizza Greix├│s (Segon, Veg: Yes, Pop: 8)
+  - Arr├▓s Arrebossat (Postre, Veg: Yes, Pop: 8)
+  - Fruita Esp├¿s (Segon, Veg: Yes, Pop: 7)
+  - Pollastre Barrejat (Segon, Veg: Yes, Pop: 6)
+  - Ou R├ápid (Postre, Veg: Yes, Pop: 6)
+  - Pa Greix├│s (Segon, Veg: Yes, Pop: 6)
+  - Patata Colorit (Segon, Veg: Yes, Pop: 5)
+  - Seit├á T├¿bi (Primer, Veg: Yes, Pop: 5)
+  - Arr├▓s Cl├ássic (Segon, Veg: Yes, Pop: 4)
+  - Fruita Sobretot (Postre, Veg: Yes, Pop: 3)
+  - Carn Esp├¿s (Postre, Veg: Yes, Pop: 2)
+  - Macarrons Blanc (Primer, Veg: Yes, Pop: 1)
+  - Fruita Lleuger (Postre, Veg: No, Pop: 10)
+  - Iogurt Blanc (Postre, Veg: No, Pop: 10)
+  - Hamburguesa Esp├¿ciat (Primer, Veg: No, Pop: 10)
+  - Pollastre Reescalfat (Postre, Veg: No, Pop: 9)
+  - Ou Batut (Postre, Veg: No, Pop: 9)
+  - Formatge Espum├│s (Segon, Veg: No, Pop: 7)
+  - Peix Espum├│s (Segon, Veg: No, Pop: 7)
+  - Fruita Marr├│ (Postre, Veg: No, Pop: 7)
+  - Fideus Elegant (Postre, Veg: No, Pop: 5)
+  - Sopa Fermentat (Segon, Veg: No, Pop: 5)
+  - Pollastre Tendre (Postre, Veg: No, Pop: 4)
+  - Cusc├║s Sabor├│s (Postre, Veg: No, Pop: 3)
+  - Farinetes Marinat (Postre, Veg: No, Pop: 3)
+  - Tofu Modern (Segon, Veg: No, Pop: 2)
+Imbalance (Max-Min Pop): 2
+Time taken: 0.006000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 4
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+(se queda asi)
+
+Loaded 100 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 5
+
+=== BENCHMARK START ===
+
+--- Problem 1: Greedy Strategy ---
+Total Menus Created: 8
+Menu 1:
+  Primer: Cusc├║s Creatiu (2.16 EUR, Pop: 2)
+  Segon:  Patata Colorit (2.80 EUR, Pop: 5)
+  Postre: Fruita Mediterrani (2.54 EUR, Pop: 9)
+  Total: 7.50 EUR, Avg Pop: 5.33, Veg: Yes
+Menu 2:
+  Primer: Hamburguesa Esp├¿ciat (2.13 EUR, Pop: 10)
+  Segon:  Formatge Festiu (2.05 EUR, Pop: 1)
+  Postre: Arr├▓s C├®sar (2.26 EUR, Pop: 7)
+  Total: 6.44 EUR, Avg Pop: 6.00, Veg: No
+Menu 3:
+  Primer: Macarrons Blanc (2.20 EUR, Pop: 1)
+  Segon:  Pa Greix├│s (3.14 EUR, Pop: 6)
+  Postre: Fideus Elegant (2.30 EUR, Pop: 5)
+  Total: 7.64 EUR, Avg Pop: 4.00, Veg: No
+Menu 4:
+  Primer: Fruita Tendre (2.28 EUR, Pop: 6)
+  Segon:  Tofu Modern (3.18 EUR, Pop: 2)
+  Postre: Crema Estacional (2.61 EUR, Pop: 8)
+  Total: 8.07 EUR, Avg Pop: 5.33, Veg: No
+Menu 5:
+  Primer: Crema Delici├│s (2.76 EUR, Pop: 10)
+  Segon:  Quinoa Esp├¿s (3.21 EUR, Pop: 7)
+  Postre: Verdura Popular (2.28 EUR, Pop: 1)
+  Total: 8.25 EUR, Avg Pop: 6.00, Veg: No
+Menu 6:
+  Primer: Iogurt Calent (3.23 EUR, Pop: 4)
+  Segon:  Fideus Negre (3.40 EUR, Pop: 2)
+  Postre: Pollastre Reescalfat (2.78 EUR, Pop: 9)
+  Total: 9.41 EUR, Avg Pop: 5.00, Veg: No
+Menu 7:
+  Primer: Seit├á T├¿bi (4.13 EUR, Pop: 5)
+  Segon:  Hamburguesa Humit (4.04 EUR, Pop: 6)
+  Postre: Cusc├║s Sobretot (2.63 EUR, Pop: 4)
+  Total: 10.80 EUR, Avg Pop: 5.00, Veg: No
+Menu 8:
+  Primer: Ou Oriental (4.44 EUR, Pop: 10)
+  Segon:  Tofu Sobretot (4.26 EUR, Pop: 8)
+  Postre: Iogurt Blanc (2.85 EUR, Pop: 10)
+  Total: 11.55 EUR, Avg Pop: 9.33, Veg: No
+P1 Greedy Time: 0.004000 s
+
+--- Comparativa P1 Backtracking ---
+Skipping P1 Backtracking (NO PODA) because N > 15 (too slow)
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+(se queda asi)
+
+L:
+Loaded 500 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 1
+
+--- Problem 1: Greedy Strategy ---
+(crashea el programa)
+
+Loaded 500 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 2
+
+--- Problem 1: Backtracking Strategy (Pruning: ON) ---
+(se queda asi)
+
+Loaded 500 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 3
+
+--- Problem 2: Greedy Strategy ---
+Increase buffer
+Time taken: 0.001000 seconds
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 4
+
+--- Problem 2: Branch & Bound Strategy (Sorting: ON) ---
+
+(se queda asi)
+
+Loaded 500 dishes.
+
+=== MENJAR AL CAMPUS - OPTIMITZACIO ===
+1. Menu Composition (Greedy)
+2. Menu Composition (Backtracking Optimitzat)
+3. Equitable Distribution (Greedy)
+4. Equitable Distribution (B&B Optimitzat)
+5. Executar Comparativa Completa (BENCHMARK)
+0. Exit
+Select an option: 5
+
+=== BENCHMARK START ===
+
+--- Problem 1: Greedy Strategy ---
+(craseha)
+Y es igual en Xl y XXL
+
+
+

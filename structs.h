@@ -29,7 +29,7 @@ typedef struct {
 } DishList;
 
 typedef struct {
-    int primer_idx; // Índex a la DishList principal
+    int primer_idx; // Index in the main DishList
     int segon_idx;
     int postre_idx;
     float total_price;
@@ -38,9 +38,9 @@ typedef struct {
 } Menu;
 
 typedef struct {
-    int *dish_indices; // Índexs dels plats assignats a aquesta cafeteria
+    int *dish_indices; // Indices of dishes assigned to this cafeteria
     int count;
-    int capacity; // Per al redimensionament dinàmic de la matriu
+    int capacity; // For dynamic array resizing
     int total_popularity;
     bool has_primer;
     bool has_segon;
