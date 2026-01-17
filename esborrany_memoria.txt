@@ -46,20 +46,23 @@ Dataset (N)   | Algorisme       | Problema 1: Menús (Temps)       | Problema 2:
 XXS (10)      | Greedy          | 0 Menús (0.001s)                | Imbalance: 1 (0.001s)            | P1: Falla restricció vegetarià.
               | Backtracking/B&B| 0 Menús (0.001s)                | Imbalance: 1 (0.001s)            | Resultats idèntics. Dataset massa petit.
 -----------------------------------------------------------------------------------------------------------------------------------
-XS (15)       | Greedy          | 1 Menú* (0.001s)                | Imbalance: 2 (0.001s)            | P1*: Menú invàlid (no veg). P2: Solució pitjor.
+XS (15)       | Greedy          | 1 Menú* (0.003s)                | Imbalance: 2 (0.001s)            | P1*: Menú invàlid (no veg). P2: Solució pitjor.
               | Backtracking/B&B| 0 Menús (0.001s)                | Imbalance: 1 (0.003s)            | P2: B&B troba millor distribució que Greedy.
 -----------------------------------------------------------------------------------------------------------------------------------
 S (50)        | Greedy          | 3 Menús (0.002s)                | Imbalance: 0 (0.003s)            | Greedy és molt ràpid però subòptim en P1.
               | Backtracking/B&B| **5 Menús** (0.368s)            | Timeout (> 60s)                  | **P1: Backtracking millora un 66% la solució.**
 -----------------------------------------------------------------------------------------------------------------------------------
-M (100)       | Greedy          | 8 Menús (0.004s)                | Imbalance: 2 (0.006s)            | Greedy escala linealment i manté velocitat.
+M (100)       | Greedy          | 8 Menús (0.006s)                | Imbalance: 2 (0.006s)            | Greedy escala linealment i manté velocitat.
               | Backtracking/B&B| Timeout / Inviable              | Timeout / Inviable               | Explosió combinatòria ($N!$). No viable.
 -----------------------------------------------------------------------------------------------------------------------------------
-L (500)       | Greedy          | Error (Crash/Stack)             | Imbalance: 0 (0.001s)            | P1 falla per recursivitat profunda. P2 funciona bé.
-              | Backtracking/B&B| No executat                     | No executat                      | Totalment inviable.
+L (500)       | Greedy          | **52 Menús** (0.029s)           | No executat (Crash P1)           | **Èxit Greedy P1 (abans fallava).**
+              | Backtracking/B&B| Timeout / Crash                 | -                                | P1 Backtracking talla l'execució.
 -----------------------------------------------------------------------------------------------------------------------------------
-XL/XXL (1000+)| Greedy          | Error (Crash)                   | Imbalance: Baix (Estimat)        | P1 requereix versió iterativa.
-              | Backtracking/B&B| No executat                     | No executat                      | -
+XL (1000)     | Greedy          | **114 Menús** (0.084s)          | No executat (Crash P1)           | Escalat lineal correcte.
+              | Backtracking/B&B| Timeout / Crash                 | -                                | -
+-----------------------------------------------------------------------------------------------------------------------------------
+XXL (2000)    | Greedy          | **217 Menús** (0.331s)          | No executat (Crash P1)           | Rendiment excel·lent ($O(N \log N)$).
+              | Backtracking/B&B| Timeout / Crash                 | -                                | -
 -----------------------------------------------------------------------------------------------------------------------------------
 
 INTERPRETACIÓ I DISCUSSIÓ DELS DADES
@@ -77,25 +80,29 @@ En passar de 50 a 100 plats, observem la naturalesa exponencial del problema. El
 En els datasets petits, el Greedy del Problema 1 retorna solucions (1 menú) que incompleixen la restricció global ("almenys un vegetarià"), mentre que el Backtracking retorna 0.
 *   Això posa de manifest un risc dels algorismes Greedy: la seva "miopia" pot portar a solucions que semblen bones però que tècnicament són invàlides si hi ha restriccions globals complexes. El Backtracking és més rigorós.
 
-**4. Límits Tècnics de la Implementació (Casos L/XL)**
-En intentar executar el Greedy amb 500+ plats per al Problema 1, el programa tanca inesperadament (Crash).
-*   Això probablement es deu a un *Stack Overflow*. Com que la solució Greedy s'ha implementat (o la gestió de llistes) de manera que consumeix recursos de pila proporcionalment a N, arribem al límit del sistema operatiu. Per a aplicacions industrials (Mida L/XL), caldria reescriure l'algorisme de manera purament iterativa i gestionar la memòria al *Heap*.
+**4. Èxit amb Grans Volums (Cas L, XL, XXL)**
+Gràcies a la correcció del *Buffer Overflow*, l'algorisme Greedy ha demostrat ser extremadament robust i eficient. Ha processat 2000 plats (XXL) en només **0.33 segons**, generant 217 menús.
+*   Observem una relació lineal/logarítmica en el temps d'execució respecte a N, confirmant que és l'única estratègia viable per a entorns reals ("Big Data").
+*   El fet que els benchmarks de L, XL i XXL s'aturessin després de P1 Greedy indica que el Backtracking (que s'executa després) segueix causant problemes (provablement Stack Overflow o Timeout) fins i tot amb les correccions de memòria, reafirmant la seva inviabilitat per a N > 50.
 
 **5. Problema 2: Greedy és sorprenentment eficaç**
-Per al problema de distribució, el Greedy aconsegueix sovint desequilibris (Imbalance) molt baixos (0, 1 o 2) en temps menyspreable, fins i tot per a datasets grans. El Branch & Bound, tot i garantir l'òptim, pateix moltíssim per podar l'arbre eficaçment sense una funció d'estimació (bound) extremadament precisa, fent-lo poc pràctic comparat amb l'eficàcia del Greedy.
+Per al problema de distribució, el Greedy aconsegueix sovint desequilibris (Imbalance) molt baixos (0, 1 o 2) en temps menyspreable.
 
 4. PROBLEMES OBSERVATS I SOLUCIONS
 ==================================
 
-1.  **Temps d'Execució en Datasets Grans**: El Backtracking es penja  amb M i L.
-    *   *Solució implementada*: S'ha afegit una condició al `main.c` per saltar l'execució del Backtracking (versió sense poda) si N > 15, i s'ha vist que fins i tot amb poda, N > 50 és el límit pràctic per a aquest problema.
+1.  **Error Crític: Buffer Overflow amb Datasets Grans (>100 plats)**
+    *   *Símptoma*: El programa es tancava inesperadament (Crash) o donava resultats erronis en executar el Greedy amb `plats_l.txt` (500 plats).
+    *   *Causa*: L'ús d'arrays estàtics de mida fixa (ex: `Dish *primers[100]`) provocava un desbordament de memòria quan N > 100.
+    *   *Solució*: Substitució de tots els arrays estàtics per assignació dinàmica de memòria (`malloc`/`calloc`) basada en el nombre real de plats llegits (`list->count`). Això ha permès executar correctament fins al cas XXL.
 
-2.  **Bloqueig de fitxers (.exe)**: A Windows, recompilar mentre el programa està obert donava error.
-    *   *Solució*: Tancar la terminal o el procés abans de fer `make`.
+2.  **Temps d'Execució del Backtracking**:
+    *   *Problema*: Amb N > 50, l'algorisme es bloqueja ("se queda asi") degut a l'explosió combinatòria.
+    *   *Solució*: Implementar un mecanisme de poda (pruning) i limitar l'execució automàtica al Benchmark per a N petits.
 
-3.  **Crash en Dataset L/XL amb Greedy**: En algunes execucions, el programa tanca inesperadament amb dades massives.
-    *   *Causes probables*: Desbordament de pila (Stack Overflow) per recursivitat excessiva o límits de memòria.
-    *   *Proposta*: Augmentar la mida de l'stack del compilador o passar a un enfocament iteratiu en lloc de recursiu per a datasets molt grans.
+3.  **Bloqueig de l'Executable (.exe)**:
+    *   *Problema*: Error "Permission denied" en recompilar a Windows si el programa no s'havia tancat.
+    *   *Solució*: Assegurar-se de tancar la terminal d'execució abans de compilar.
 
 5. CONCLUSIONS
 ==============

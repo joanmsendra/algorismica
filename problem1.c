@@ -39,11 +39,25 @@ int compare_dishes_by_price(const void *a, const void *b) {
 void solve_problem1_greedy(DishList *list) {
     printf("\n--- Problem 1: Greedy Strategy ---\n");
     
-    // Punters als plats per ordenar-los sense moure les estructures reals
-    Dish *primers[100], *segons[100], *postres[100];
-    int n_prim = 0, n_seg = 0, n_pos = 0;
-    bool used[1000] = {false}; // Assumint que l'id màxim < 1000
+    // Assignació dinàmica per suportar qualsevol mida de dataset (evita Crash amb L/XL/XXL)
+    Dish **primers = malloc(list->count * sizeof(Dish*));
+    Dish **segons = malloc(list->count * sizeof(Dish*));
+    Dish **postres = malloc(list->count * sizeof(Dish*));
+    bool *used = calloc(list->count, sizeof(bool)); // Utilitza calloc per inicialitzar a false
+    Menu *menus = malloc(list->count * sizeof(Menu)); // Mida màxima teòrica
 
+    if (!primers || !segons || !postres || !used || !menus) {
+        fprintf(stderr, "Error: No hi ha prou memòria per executar Greedy.\n");
+        if(primers) free(primers);
+        if(segons) free(segons);
+        if(postres) free(postres);
+        if(used) free(used);
+        if(menus) free(menus);
+        return;
+    }
+
+    int n_prim = 0, n_seg = 0, n_pos = 0;
+    
     for (int i = 0; i < list->count; i++) {
         if (list->dishes[i].type == PRIMER) primers[n_prim++] = &list->dishes[i];
         else if (list->dishes[i].type == SEGON) segons[n_seg++] = &list->dishes[i];
@@ -54,7 +68,6 @@ void solve_problem1_greedy(DishList *list) {
     qsort(segons, n_seg, sizeof(Dish*), compare_dishes_by_price);
     qsort(postres, n_pos, sizeof(Dish*), compare_dishes_by_price);
 
-    Menu menus[100];
     int menu_count = 0;
     bool veg_menu_found = false;
 
@@ -124,6 +137,12 @@ veg_found:
     for (int i = 0; i < menu_count; i++) {
         print_menu(&menus[i], list, i + 1);
     }
+
+    free(primers);
+    free(segons);
+    free(postres);
+    free(used);
+    free(menus);
 }
 
 // --- Estratègia de Backtracking ---
@@ -229,7 +248,7 @@ void solve_problem1_backtracking(DishList *list, bool enable_pruning) {
     best_sol.count = 0;
     best_sol.has_veg = false;
 
-    bt_used = (bool*)calloc(1000, sizeof(bool)); // Ajustar la mida segons sigui necessari o utilitzar l'ID màxim
+    bt_used = (bool*)calloc(list->count + 1, sizeof(bool)); // Ajustat dinàmicament segons N
     
     Menu *current_menus = malloc(list->count * sizeof(Menu));
     

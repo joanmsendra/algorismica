@@ -6,7 +6,7 @@
 #include "problem2.h"
 
 int main() {
-    DishList list = load_dishes("plats_s.txt");
+    DishList list = load_dishes("plats_xxl.txt");
     if (list.count == -1) {
         return 1;
     }

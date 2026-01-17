@@ -82,8 +82,9 @@ void solve_problem2_greedy(DishList *list) {
     Cafeteria cafs[NUM_CAFETERIAS];
     for (int i = 0; i < NUM_CAFETERIAS; i++) init_cafeteria(&cafs[i], list->count);
 
-    Dish *ptrs[100]; // Assumint max < 100 per a matriu estàtica, o malloc
-    if (list->count > 100) { fprintf(stderr, "Increase buffer\n"); return; }
+    // Assignació dinàmica per evitar buffer overflow amb N > 100
+    Dish **ptrs = malloc(list->count * sizeof(Dish*));
+    if (!ptrs) { fprintf(stderr, "Memory error\n"); return; }
 
     int total_veg = 0;
     for (int i = 0; i < list->count; i++) {
@@ -94,7 +95,17 @@ void solve_problem2_greedy(DishList *list) {
     qsort(ptrs, list->count, sizeof(Dish*), compare_dishes_desc_pop);
 
     // Lògica de distribució
-    Dish *veg_dishes[100], *non_veg_dishes[100];
+    Dish **veg_dishes = malloc(list->count * sizeof(Dish*));
+    Dish **non_veg_dishes = malloc(list->count * sizeof(Dish*));
+    
+    if (!veg_dishes || !non_veg_dishes) {
+        fprintf(stderr, "Memory error\n");
+        free(ptrs);
+        if(veg_dishes) free(veg_dishes);
+        if(non_veg_dishes) free(non_veg_dishes);
+        return;
+    }
+
     int n_veg = 0, n_non = 0;
 
     for (int i = 0; i < list->count; i++) {
@@ -102,11 +113,8 @@ void solve_problem2_greedy(DishList *list) {
         else non_veg_dishes[n_non++] = ptrs[i];
     }
     
-    n_veg = 0; n_non = 0;
-    for (int i = 0; i < list->count; i++) {
-        if (ptrs[i]->is_vegetarian) veg_dishes[n_veg++] = ptrs[i];
-        else non_veg_dishes[n_non++] = ptrs[i];
-    }
+    // (Eliminat segon bucle redundant que hi havia aquí)
+
 
     // Distribuir Vegetarià
     for (int i = 0; i < n_veg; i++) {
@@ -170,6 +178,9 @@ void solve_problem2_greedy(DishList *list) {
         printf("WARNING: Greedy strategy failed to satisfy all constraints.\n");
     }
 
+    free(ptrs);
+    free(veg_dishes);
+    free(non_veg_dishes);
     for (int i = 0; i < NUM_CAFETERIAS; i++) free_cafeteria(&cafs[i]);
 }
 
